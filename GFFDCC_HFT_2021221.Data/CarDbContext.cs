@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GFFDCC_HFT_2021221.Data
 {
-    class CarDbContext : DbContext
+    public class CarDbContext : DbContext
     {
         public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<Car> Cars { get; set; }     
@@ -33,6 +33,10 @@ namespace GFFDCC_HFT_2021221.Data
             Brand audi = new Brand() { Id = 3, Name = "Audi" };
             Brand volkswagen = new Brand() { Id = 4, Name = "Volkswagen" };
             Brand skoda = new Brand() { Id = 5, Name = "Skoda" };
+
+            CarDealership zsolczai = new CarDealership() { Id = 1, DealershipName = "Zsolczai"};
+            CarDealership dudi = new CarDealership() { Id = 2, DealershipName = "Dudi" };
+            CarDealership hasznaltautohu = new CarDealership() { Id = 3, DealershipName = "Használtautók" };
 
             Car bmw1 = new Car() { Id = 1, BrandId = bmw.Id, BasePrice = 20000, Model = "BMW 116d" };
             Car bmw2 = new Car() { Id = 2, BrandId = bmw.Id, BasePrice = 30000, Model = "BMW 510" };
