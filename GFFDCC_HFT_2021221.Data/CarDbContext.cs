@@ -34,9 +34,9 @@ namespace GFFDCC_HFT_2021221.Data
             Brand volkswagen = new Brand() { Id = 4, Name = "Volkswagen" };
             Brand skoda = new Brand() { Id = 5, Name = "Skoda" };
 
-            CarDealership zsolczai = new CarDealership() { Id = 1, DealershipName = "Zsolczai"};
-            CarDealership dudi = new CarDealership() { Id = 2, DealershipName = "Dudi" };
-            CarDealership hasznaltautohu = new CarDealership() { Id = 3, DealershipName = "Használtautók" };
+            CarDealership zsolczai = new CarDealership() { Id = 1, Name = "Zsolczai"};
+            CarDealership dudi = new CarDealership() { Id = 2, Name = "Dudi" };
+            CarDealership hasznaltautohu = new CarDealership() { Id = 3, Name = "Használtautók" };
 
             Car bmw1 = new Car() { Id = 1, BrandId = bmw.Id, BasePrice = 20000, Model = "BMW 116d" };
             Car bmw2 = new Car() { Id = 2, BrandId = bmw.Id, BasePrice = 30000, Model = "BMW 510" };
@@ -51,6 +51,7 @@ namespace GFFDCC_HFT_2021221.Data
 
             modelBuilder.Entity<Brand>().HasData(bmw, citroen, audi, volkswagen,skoda);
             modelBuilder.Entity<Car>().HasData(bmw1, bmw2, citroen1, citroen2, audi1, audi2, volkswagen1, volkswagen2,skoda1,skoda2);
+            modelBuilder.Entity<CarDealership>().HasData(zsolczai, dudi, hasznaltautohu);
         }
 
     }

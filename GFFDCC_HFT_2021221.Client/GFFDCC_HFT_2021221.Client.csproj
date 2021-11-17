@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GFFDCC_HFT_2021221.Data\GFFDCC_HFT_2021221.Data.csproj" />
+    <ProjectReference Include="..\GFFDCC_HFT_2021221.Logic\GFFDCC_HFT_2021221.Logic.csproj" />
     <ProjectReference Include="..\GFFDCC_HFT_2021221.Models\GFFDCC_HFT_2021221.Models.csproj" />
   </ItemGroup>
 

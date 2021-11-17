@@ -20,7 +20,7 @@ namespace GFFDCC_HFT_2021221.Models
         public string Model { get; set; }
 
 
-        public int? BasePrice { get; set; }
+        public int BasePrice { get; set; }
 
         [NotMapped]
         public Brand Brand { get; set; }

@@ -16,7 +16,7 @@ namespace GFFDCC_HFT_2021221.Models
 
         [MaxLength(100)]
         [Required]
-        public string DealershipName { get; set; }
+        public string Name { get; set; }
         [NotMapped]
         public virtual ICollection<Car> CarStock { get; set; }
 
