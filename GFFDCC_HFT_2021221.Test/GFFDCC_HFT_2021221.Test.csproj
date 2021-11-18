@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.13.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\GFFDCC_HFT_2021221.Logic\GFFDCC_HFT_2021221.Logic.csproj" />
     <ProjectReference Include="..\GFFDCC_HFT_2021221.Models\GFFDCC_HFT_2021221.Models.csproj" />
     <ProjectReference Include="..\GFFDCC_HFT_2021221.Repository\GFFDCC_HFT_2021221.Repository.csproj" />

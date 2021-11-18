@@ -28,15 +28,32 @@ namespace GFFDCC_HFT_2021221.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Car>(entity =>
+            {
+                entity
+                .HasOne(cars => cars.CarDealership)
+                .WithMany(cardealerships => cardealerships.Cars)
+                .HasForeignKey(cars => cars.CarDealershipID)
+                .OnDelete(DeleteBehavior.Cascade);
+            });
+            modelBuilder.Entity<Car>(entity =>
+            {
+                entity
+                .HasOne(cars => cars.Brand)
+                .WithMany(brands => brands.Cars)
+                .HasForeignKey(cars => cars.BrandId)
+                .OnDelete(DeleteBehavior.Cascade);
+            });
+
             Brand bmw = new Brand() { Id = 1, Name = "BMW" };
             Brand citroen = new Brand() { Id = 2, Name = "Citroen" };
             Brand audi = new Brand() { Id = 3, Name = "Audi" };
             Brand volkswagen = new Brand() { Id = 4, Name = "Volkswagen" };
             Brand skoda = new Brand() { Id = 5, Name = "Skoda" };
 
-            CarDealership zsolczai = new CarDealership() { Id = 1, Name = "Zsolczai"};
-            CarDealership dudi = new CarDealership() { Id = 2, Name = "Dudi" };
-            CarDealership hasznaltautohu = new CarDealership() { Id = 3, Name = "Használtautók" };
+            CarDealership zsolczai = new CarDealership() { Id = 1, Name = "Zsolczai",Address="",Taxnumber= "4932428556" };
+            CarDealership dudi = new CarDealership() { Id = 2, Name = "Dudi",Address="",Taxnumber= "2176338546" };
+            CarDealership hasznaltautohu = new CarDealership() { Id = 3, Name = "Használtautók", Address = "", Taxnumber = "5436637546" };
 
             Car bmw1 = new Car() { Id = 1, BrandId = bmw.Id, BasePrice = 20000, Model = "BMW 116d" };
             Car bmw2 = new Car() { Id = 2, BrandId = bmw.Id, BasePrice = 30000, Model = "BMW 510" };

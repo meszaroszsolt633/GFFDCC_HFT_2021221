@@ -39,6 +39,7 @@ namespace GFFDCC_HFT_2021221.Repository
             oldcar.BasePrice = car.BasePrice;
             oldcar.Model = car.Model;
             oldcar.BrandId = car.BrandId;
+            oldcar.CarDealershipID = car.CarDealershipID;
             db.SaveChanges();
         }
 

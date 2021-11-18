@@ -23,9 +23,11 @@ namespace GFFDCC_HFT_2021221.Models
         public int BasePrice { get; set; }
 
         [NotMapped]
-        public Brand Brand { get; set; }
+        public virtual Brand Brand { get; set; }
+        [NotMapped]
+        public virtual CarDealership CarDealership { get; set; }
 
-        [ForeignKey(nameof(Brand))]
         public int BrandId { get; set; }
+        public int CarDealershipID { get; set; }
     }
 }

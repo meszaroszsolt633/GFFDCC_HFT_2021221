@@ -17,8 +17,10 @@ namespace GFFDCC_HFT_2021221.Models
         [MaxLength(100)]
         [Required]
         public string Name { get; set; }
+        public string Address { get; set; }
+        public string Taxnumber { get; set; }
         [NotMapped]
-        public virtual ICollection<Car> CarStock { get; set; }
+        public virtual ICollection<Car> Cars { get; set; }
 
         [ForeignKey(nameof(Car))]
         public int CarId { get; set; }
