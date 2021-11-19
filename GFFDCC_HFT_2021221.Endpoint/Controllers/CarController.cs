@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GFFDCC_HFT_2021221.Logic;
+using GFFDCC_HFT_2021221.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,15 +10,20 @@ using System.Threading.Tasks;
 
 namespace GFFDCC_HFT_2021221.Endpoint.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class CarController : ControllerBase
     {
-        // GET: api/<CarController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        ICarLogic cl;
+        public CarController(ICarLogic cl)
         {
-            return new string[] { "value1", "value2" };
+            this.cl = cl;
+        }
+        // GET: /car
+        [HttpGet]
+        public IEnumerable<Car> Get()
+        {
+            return cl.ReadAll();
         }
 
         // GET api/<CarController>/5

@@ -11,6 +11,8 @@ namespace GFFDCC_HFT_2021221.Logic
     public class CarLogic : ICarLogic
     {
         ICarRepository carRepo;
+        ICarDealershipRepository dealershipRepo;
+        IBrandRepository brandRepo;
         public CarLogic(ICarRepository carRepo)
         {
             this.carRepo = carRepo;
@@ -54,6 +56,22 @@ namespace GFFDCC_HFT_2021221.Logic
                    group x by x.Brand.Name into g
                    select new KeyValuePair<string, double>
                    (g.Key, g.Average(t => t.BasePrice));
+        }
+        public IEnumerable<Car> CarsFromHasznaltauto()
+        {
+            var x1 = from x in carRepo.ReadAll()
+                     join cardealership in dealershipRepo.ReadAll()
+                     on x.CarDealershipID equals cardealership.Id
+                     where cardealership.Name == "Használtautók"
+                     select new Car
+                     {
+                         Id = x.Id,
+                         Model = x.Model,
+                         BasePrice = x.BasePrice,
+                         BrandId = x.BrandId,
+                         CarDealershipID = x.CarDealershipID
+                     };
+            return x1;
         }
     }
 }
