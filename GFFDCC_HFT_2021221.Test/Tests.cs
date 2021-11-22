@@ -103,7 +103,7 @@ namespace GFFDCC_HFT_2021221.Test
             this.mockCarRepo.Verify(repo => repo.Read(id), Times.Once);
         }
         [Test]
-        public void InsertCardealership()
+        public void CreateCardealership()
         {
             int dealershipsCount = this.cardealerships.Count;
             this.mockCardealershipRepo.Setup(repo => repo.ReadAll()).Returns(this.cardealerships.AsQueryable());
