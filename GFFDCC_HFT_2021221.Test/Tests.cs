@@ -117,6 +117,22 @@ namespace GFFDCC_HFT_2021221.Test
             this.mockCardealershipRepo.Verify(repo => repo.ReadAll(), Times.Once);
             this.mockCardealershipRepo.Verify(repo => repo.ReadAll(), Times.Never);
         }
+        [TestCase(5000,"Citroen C6")]
+        public void CreateCar(int price, string model)
+        {
+            int carcount = this.cars.Count;
+            var x = this.cLogic.ReadAll();
+            Car newcar = new Car()
+            {
+                Id = 6,
+                Model = model,
+                BasePrice= price       
+            };
+            this.mockCarRepo.Setup(repo => repo.ReadAll()).Returns(this.cars.AsQueryable());
+            this.mockCarRepo.Setup(repo => repo.Read(It.IsAny<int>())).Returns(this.cars[6]);
+            Assert.That(x.Count, Is.EqualTo(carcount + 1));
+            Assert.That(newcar.Model, Is.EqualTo(model));
+        }
 
     }
 }
