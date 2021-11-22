@@ -10,9 +10,13 @@ namespace GFFDCC_HFT_2021221.Logic
 {
     public class BrandLogic : IBrandLogic
     {
+        ICarRepository carRepo;
+        ICarDealershipRepository dealershipRepo;
         IBrandRepository brandRepo;
-        public BrandLogic(IBrandRepository brandRepo)
+        public BrandLogic(ICarRepository carRepo, ICarDealershipRepository dealershipRepo, IBrandRepository brandRepo)
         {
+            this.carRepo = carRepo;
+            this.dealershipRepo = dealershipRepo;
             this.brandRepo = brandRepo;
         }
         public void Create(Brand brand)

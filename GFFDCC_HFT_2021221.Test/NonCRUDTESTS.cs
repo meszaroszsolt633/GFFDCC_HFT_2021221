@@ -5,18 +5,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Moq;
+using GFFDCC_HFT_2021221.Repository;
 
 namespace GFFDCC_HFT_2021221.Test
 {
     [TestFixture]
-    public class CRUDTest
+    public class NonCRUDTESTS
     {
+        private Mock<ICarRepository> mockCarRepo;
+        private Mock<IBrandRepository> mockBrandRepo;
+        private Mock<ICarDealershipRepository> mockCardealershipRepo;
         private List<Car> cars;
         private List<Brand> brands;
         private List<CarDealership> cardealerships;
         [SetUp]
         public void Setup()
         {
+            this.mockCardealershipRepo = new Mock<ICarDealershipRepository>(MockBehavior.Loose);
+            this.mockBrandRepo= new Mock<IBrandRepository>(MockBehavior.Loose);
+            this.mockCarRepo = new Mock<ICarRepository>(MockBehavior.Loose);
+
+
             this.cars = new List<Car>()
             {
                 new Car(){Id=1, Model="Test1"},
@@ -39,6 +49,7 @@ namespace GFFDCC_HFT_2021221.Test
                 new CarDealership(){Id=3,Name="CardealershipTest3"},
             };
         }
+
 
     }
 }

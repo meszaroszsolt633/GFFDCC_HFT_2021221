@@ -10,30 +10,38 @@ namespace GFFDCC_HFT_2021221.Logic
 {
     public class CarDealershipLogic : ICarDealershipLogic
     {
-        ICarDealershipRepository carDealershipRepo;
-        public CarDealershipLogic(ICarDealershipRepository carDealershipRepo)
+        ICarRepository carRepo;
+        ICarDealershipRepository dealershipRepo;
+        IBrandRepository brandRepo;
+        public CarDealershipLogic(ICarRepository carRepo, ICarDealershipRepository dealershipRepo, IBrandRepository brandRepo)
         {
-            this.carDealershipRepo = carDealershipRepo;
+            this.carRepo = carRepo;
+            this.dealershipRepo = dealershipRepo;
+            this.brandRepo = brandRepo;
         }
         public void Create(CarDealership cardealership)
         {
-            carDealershipRepo.Create(cardealership);
+            dealershipRepo.Create(cardealership);
         }
         public CarDealership Read(int id)
         {
-            return carDealershipRepo.Read(id);
+            return dealershipRepo.Read(id);
         }
         public IEnumerable<CarDealership> ReadAll()
         {
-            return carDealershipRepo.ReadAll();
+            return dealershipRepo.ReadAll();
         }
         public void Delete(int id)
         {
-            carDealershipRepo.Delete(id);
+            dealershipRepo.Delete(id);
         }
         public void Update(CarDealership cardealership)
         {
-            carDealershipRepo.Update(cardealership);
+            dealershipRepo.Update(cardealership);
+        }
+        public IList<CarDealership> GetAllCardealerships()
+        {
+            return this.dealershipRepo.ReadAll().ToList();
         }
         
     }

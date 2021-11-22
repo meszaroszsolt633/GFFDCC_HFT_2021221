@@ -9,20 +9,22 @@
   },
   "profiles": {
     "IIS Express": {
-      "commandName": "IISExpress",
+        "commandName": "IISExpress",
+        "launchUrl": "car",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "GFFDCC_HFT_2021221.Endpoint": {
-      "commandName": "Project",
-      "dotnetRunMessages": "true",
-      "launchBrowser": true,
-      "applicationUrl": "http://localhost:5000",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+        "commandName": "Project",
+        "launchUrl": "car",
+        "dotnetRunMessages": "true",
+        "launchBrowser": true,
+        "applicationUrl": "http://localhost:5000",
+        "environmentVariables": {
+            "ASPNETCORE_ENVIRONMENT": "Development"
+        }
     }
   }
 }

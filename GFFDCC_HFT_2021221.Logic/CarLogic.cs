@@ -13,9 +13,11 @@ namespace GFFDCC_HFT_2021221.Logic
         ICarRepository carRepo;
         ICarDealershipRepository dealershipRepo;
         IBrandRepository brandRepo;
-        public CarLogic(ICarRepository carRepo)
+        public CarLogic(ICarRepository carRepo, ICarDealershipRepository dealershipRepo, IBrandRepository brandRepo)
         {
             this.carRepo = carRepo;
+            this.dealershipRepo = dealershipRepo;
+            this.brandRepo=brandRepo;
         }
         public void Create(Car car)
         {
@@ -73,5 +75,6 @@ namespace GFFDCC_HFT_2021221.Logic
                      };
             return x1;
         }
+
     }
 }
