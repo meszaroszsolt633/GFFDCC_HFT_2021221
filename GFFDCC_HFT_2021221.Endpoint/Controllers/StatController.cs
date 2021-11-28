@@ -17,11 +17,18 @@ namespace GFFDCC_HFT_2021221.Endpoint.Controllers
         {
             this.cl = cl;
         }
-        // GET: /car
+
         [HttpGet]
-        public IEnumerable<Car> Get()
+        public double AVGPrice()
         {
-            return cl.ReadAll();
+            return cl.AVGPrice();
+
         }
+        [HttpGet]
+        public IEnumerable<KeyValuePair<string,double>> AVGPricebyBrands()
+        {
+            return cl.AVGPriceByBrands();
+        }
+
     }
 }

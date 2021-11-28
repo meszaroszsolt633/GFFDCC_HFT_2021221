@@ -1,7 +1,7 @@
-﻿using GFFDCC_HFT_2021221.Data;
-using GFFDCC_HFT_2021221.Logic;
-using GFFDCC_HFT_2021221.Repository;
+﻿using CarDB.Client;
+using GFFDCC_HFT_2021221.Models;
 using System;
+
 
 namespace GFFDCC_HFT_2021221.Client
 {
@@ -9,6 +9,10 @@ namespace GFFDCC_HFT_2021221.Client
     {
         static void Main(string[] args)
         {
+            System.Threading.Thread.Sleep(8000);
+            RestService rest = new RestService("http://localhost:5822");
+            var brands = rest.Get<Brand>("brand");
+            ;
         }
     }
 }
