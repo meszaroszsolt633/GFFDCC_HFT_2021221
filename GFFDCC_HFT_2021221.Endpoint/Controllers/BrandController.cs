@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GFFDCC_HFT_2021221.Logic;
+using GFFDCC_HFT_2021221.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,40 +10,44 @@ using System.Threading.Tasks;
 
 namespace GFFDCC_HFT_2021221.Endpoint.Controllers
 {
-    [Route([controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class BrandController : ControllerBase
     {
+        IBrandLogic bl;
         // GET: api/<BrandController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Brand> Get()
         {
-            return new string[] { "value1", "value2" };
+            return bl.ReadAll();
         }
 
         // GET api/<BrandController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Brand Get(int id)
         {
-            return "value";
+            return bl.Read(id);
         }
 
         // POST api/<BrandController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Brand value)
         {
+            bl.Create(value);
         }
 
         // PUT api/<BrandController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put([FromBody] Brand value)
         {
+            bl.Update(value);
         }
 
         // DELETE api/<BrandController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            bl.Delete(id);
         }
     }
 }
