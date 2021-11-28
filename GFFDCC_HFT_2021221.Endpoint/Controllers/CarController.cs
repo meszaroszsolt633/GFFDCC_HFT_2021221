@@ -28,27 +28,30 @@ namespace GFFDCC_HFT_2021221.Endpoint.Controllers
 
         // GET api/<CarController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Car Get(int id)
         {
-            return "value";
+            return cl.Read(id);
         }
 
         // POST api/<CarController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Car value)
         {
+            cl.Create(value);
         }
 
         // PUT api/<CarController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put([FromBody] Car value)
         {
+            cl.Update(value);
         }
 
         // DELETE api/<CarController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            cl.Delete(id);
         }
     }
 }

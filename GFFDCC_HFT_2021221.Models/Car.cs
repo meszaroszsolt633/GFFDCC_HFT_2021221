@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace GFFDCC_HFT_2021221.Models
@@ -23,11 +24,14 @@ namespace GFFDCC_HFT_2021221.Models
         public int BasePrice { get; set; }
 
         [NotMapped]
+        [JsonIgnore]
         public virtual Brand Brand { get; set; }
         [NotMapped]
+        [JsonIgnore]
         public virtual CarDealership CarDealership { get; set; }
-
+        [ForeignKey(nameof(Brand))]
         public int BrandId { get; set; }
+        [ForeignKey(nameof(CarDealership))]
         public int CarDealershipID { get; set; }
     }
 }
