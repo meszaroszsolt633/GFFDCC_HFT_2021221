@@ -34,7 +34,7 @@ namespace GFFDCC_HFT_2021221.Data
                 .HasOne(cars => cars.CarDealership)
                 .WithMany(cardealerships => cardealerships.Cars)
                 .HasForeignKey(cars => cars.CarDealershipID)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
             });
             modelBuilder.Entity<Car>(entity =>
             {
@@ -42,7 +42,7 @@ namespace GFFDCC_HFT_2021221.Data
                 .HasOne(cars => cars.Brand)
                 .WithMany(brands => brands.Cars)
                 .HasForeignKey(cars => cars.BrandId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
             });
 
             Brand bmw = new Brand() { Id = 1, Name = "BMW" };

@@ -20,5 +20,9 @@ namespace GFFDCC_HFT_2021221.Models
 
         [NotMapped]
         public virtual ICollection<Car> Cars { get; set; }
+        public Brand()
+        {
+            Cars = new HashSet<Car>();
+        }
     }
 }

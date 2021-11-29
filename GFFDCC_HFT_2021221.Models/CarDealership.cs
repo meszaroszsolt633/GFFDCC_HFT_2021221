@@ -21,8 +21,9 @@ namespace GFFDCC_HFT_2021221.Models
         public string Taxnumber { get; set; }
         [NotMapped]
         public virtual ICollection<Car> Cars { get; set; }
-
-        [ForeignKey(nameof(Car))]
-        public int CarId { get; set; }
+        public CarDealership()
+        {
+            Cars = new HashSet<Car>();
+        }
     }
 }
