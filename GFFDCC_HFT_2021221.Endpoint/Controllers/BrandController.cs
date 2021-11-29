@@ -16,6 +16,11 @@ namespace GFFDCC_HFT_2021221.Endpoint.Controllers
     {
         IBrandLogic bl;
         // GET: api/<BrandController>
+        
+        public BrandController(IBrandLogic bl)
+        {
+            this.bl = bl;
+        }
         [HttpGet]
         public IEnumerable<Brand> Get()
         {

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GFFDCC_HFT_2021221.Logic;
+using GFFDCC_HFT_2021221.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,40 +10,49 @@ using System.Threading.Tasks;
 
 namespace GFFDCC_HFT_2021221.Endpoint.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class CardealershipController : ControllerBase
     {
-        // GET: api/<CardealershipController>
+        ICarDealershipLogic cdl;
+        public CardealershipController(ICarDealershipLogic cdl)
+        {
+            this.cdl = cdl;
+        }
+        // GET: api/<BrandController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<CarDealership> Get()
         {
-            return new string[] { "value1", "value2" };
+            return cdl.ReadAll();
         }
 
-        // GET api/<CardealershipController>/5
+        // GET api/<BrandController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public CarDealership Get(int id)
         {
-            return "value";
+            return cdl.Read(id);
         }
 
-        // POST api/<CardealershipController>
+        // POST api/<BrandController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] CarDealership value)
         {
+            cdl.Create(value);
         }
 
-        // PUT api/<CardealershipController>/5
+        // PUT api/<BrandController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put([FromBody] CarDealership value)
         {
+            cdl.Update(value);
         }
 
-        // DELETE api/<CardealershipController>/5
+        // DELETE api/<BrandController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            cdl.Delete(id);
         }
     }
+
 }

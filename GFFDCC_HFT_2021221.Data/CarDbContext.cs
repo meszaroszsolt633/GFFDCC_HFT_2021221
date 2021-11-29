@@ -15,7 +15,7 @@ namespace GFFDCC_HFT_2021221.Data
         public virtual DbSet<CarDealership> CarDealerships { get; set; }
         public CarDbContext()
         {
-            Database.EnsureCreated();
+            this.Database.EnsureCreated();
         }
         protected override void OnConfiguring(
             DbContextOptionsBuilder optionsBuilder)
@@ -23,7 +23,7 @@ namespace GFFDCC_HFT_2021221.Data
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseLazyLoadingProxies().
-                    UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\razor\\source\\repos\\GFFDCC_HFT_2021221\\GFFDCC_HFT_2021221.Data\\Database1.mdf\"; Integrated Security=True");
+                    UseSqlServer(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security = True; MultipleActiveResultSets = True");
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
