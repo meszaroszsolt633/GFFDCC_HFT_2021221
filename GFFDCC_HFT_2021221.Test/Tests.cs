@@ -100,7 +100,7 @@ namespace GFFDCC_HFT_2021221.Test
             {
                 Id = 4,
                 Name = "teszt",
-                Address = "test road 123",
+                Country = "TestLandia",
                 Taxnumber="435323253"
 
             };

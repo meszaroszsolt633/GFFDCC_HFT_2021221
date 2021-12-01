@@ -37,7 +37,7 @@ namespace GFFDCC_HFT_2021221.Repository
         {
             var oldCarDealership = Read(cardealership.Id);
             oldCarDealership.Name = cardealership.Name;
-            oldCarDealership.Address = cardealership.Address;
+            oldCarDealership.Country = cardealership.Country;
             oldCarDealership.Taxnumber = cardealership.Taxnumber;
             db.SaveChanges();
         }

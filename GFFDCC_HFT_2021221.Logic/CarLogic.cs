@@ -45,13 +45,11 @@ namespace GFFDCC_HFT_2021221.Logic
         }
 
         //non-crud
-        //Average price
 
         public double AVGPrice()
         {
             return carRepo.ReadAll().Average(t => t.BasePrice);
         }
-        //Average price by brands
         public IEnumerable<KeyValuePair<string, double>> AVGPriceByBrands()
         {
             return from x in carRepo.ReadAll()
@@ -75,10 +73,55 @@ namespace GFFDCC_HFT_2021221.Logic
                      };
             return x1;
         }
-        public IEnumerable<Car> CarsByBrand(int price)
+        public IEnumerable<Car> CarsByCountry(string country)
         {
-            var q = from x in carRepo.ReadAll()
-                    join 
+            var x1 = from x in carRepo.ReadAll()
+                     join cardealership in dealershipRepo.ReadAll()
+                     on x.CarDealershipID equals cardealership.Id
+                     where cardealership.Country == country
+                     select new Car
+                     {
+                         Id = x.Id,
+                         Model = x.Model,
+                         BasePrice = x.BasePrice,
+                         BrandId = x.BrandId,
+                         CarDealershipID = x.CarDealershipID
+                     };
+            return x1;
+        }
+        public IEnumerable<KeyValuePair<string,double>> BrandPopularityByCars()
+        {
+            return from x in carRepo.ReadAll()
+                   join y in brandRepo.ReadAll()
+                   on x.BrandId equals y.Id
+                   group x by y.Name into z
+                   select new KeyValuePair<string, double>
+                   (z.Key, z.Count());
+                   
+
+        }
+        public IEnumerable<AveragePriceResult> AverageCarPriceByBrandsHigherThan(int minavg)
+        {
+            var test =  from x in carRepo.ReadAll()
+                   join y in brandRepo.ReadAll()
+                   on x.BrandId equals y.Id
+                   group x by y.Name into z
+                   where z.Average(xx => xx.BasePrice) > minavg
+                   orderby z.Average(xx => xx.BasePrice) descending
+                   select new AveragePriceResult()
+                   {
+                       Avgprice=z.Average(x=>x.BasePrice),
+                       Brand=z.Key,
+
+                   };
+            if(minavg>=0 && test.ToList().Count>=1)
+            {
+                return test.ToList();
+            }
+            else
+            {
+                throw new ArgumentException("The average is higher than max average, or a negative number.");
+            }
         }
 
     }

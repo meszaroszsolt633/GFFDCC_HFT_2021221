@@ -51,9 +51,9 @@ namespace GFFDCC_HFT_2021221.Data
             Brand volkswagen = new Brand() { Id = 4, Name = "Volkswagen" };
             Brand skoda = new Brand() { Id = 5, Name = "Skoda" };
 
-            CarDealership zsolczai = new CarDealership() { Id = 1, Name = "Zsolczai",Address="",Taxnumber= "4932428556" };
-            CarDealership dudi = new CarDealership() { Id = 2, Name = "Dudi",Address="",Taxnumber= "2176338546" };
-            CarDealership hasznaltautohu = new CarDealership() { Id = 3, Name = "Használtautók", Address = "", Taxnumber = "5436637546" };
+            CarDealership zsolczai = new CarDealership() { Id = 1, Name = "Zsolczai",Country="Slovakia",Taxnumber= "4932428556" };
+            CarDealership dudi = new CarDealership() { Id = 2, Name = "Dudi",Country="Romania",Taxnumber= "2176338546" };
+            CarDealership hasznaltautohu = new CarDealership() { Id = 3, Name = "Használtautók", Country = "Hungary", Taxnumber = "5436637546" };
 
             Car bmw1 = new Car() { Id = 1, BrandId = bmw.Id, BasePrice = 18000, Model = "BMW 116d",CarDealershipID=1};
             Car bmw2 = new Car() { Id = 2, BrandId = bmw.Id, BasePrice = 16000, Model = "BMW 510", CarDealershipID = 1 };
