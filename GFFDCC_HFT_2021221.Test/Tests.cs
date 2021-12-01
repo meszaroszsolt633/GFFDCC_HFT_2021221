@@ -88,40 +88,35 @@ namespace GFFDCC_HFT_2021221.Test
             this.mockCarRepo.Verify(z => z.Read(It.IsAny<int>()), Times.Exactly(2));
             this.mockCarRepo.Verify(z => z.ReadAll(), Times.Never);
         }
-        [TestCase(2,"test1")]
-        [TestCase(3,"test322132")]
-        public void ChangeCarModel(int id, string newName)
-        {
-            Car testCar = this.cLogic.Read(id);
-            testCar.Model = newName;
 
-
-            this.mockCarRepo.Setup(y => y.ReadAll()).Returns(this.cars.AsQueryable());
-            this.mockCarRepo.Setup(y => y.Read(It.IsAny<int>())).Returns(this.cars[id]);
-            this.mockCarRepo.Setup(y => y.Update(testCar));
-            this.cLogic.Update(testCar);
-
-            Assert.That(this.cLogic.Read(id).Model, Is.EqualTo(newName));
-            this.mockCarRepo.Verify(y => y.Read(id), Times.Once);
-        }
         [Test]
         public void CreateCardealership()
         {
-            int dealershipsCount = this.cardealerships.Count;
             this.mockCardealershipRepo.Setup(y => y.ReadAll()).Returns(this.cardealerships.AsQueryable());
             this.mockCardealershipRepo.Setup(y => y.Create(It.IsAny<CarDealership>())).Callback<CarDealership>((CarDealership cd) => this.cardealerships.Add(cd));
-            this.cdLogic.Create(new CarDealership() { Id = 4, Name = "Teszt KFT." });
+            int dealershipsCount = this.cardealerships.Count;
             var x = this.cdLogic.ReadAll();
+            CarDealership newcd = new CarDealership()
+            {
+                Id = 4,
+                Name = "teszt",
+                Address = "test road 123",
+                Taxnumber="435323253"
+
+            };
+            this.cdLogic.Create(newcd);
+            
 
             Assert.That(x.Count, Is.EqualTo(dealershipsCount + 1));
+            Assert.That(newcd.Name, Is.EqualTo("teszt"));
 
             this.mockCardealershipRepo.Verify(y => y.Create(It.IsAny<CarDealership>()), Times.Once);
-            this.mockCardealershipRepo.Verify(y => y.ReadAll(), Times.Once);
-            this.mockCardealershipRepo.Verify(y => y.ReadAll(), Times.Never);
         }
         [TestCase(5000,"Citroen C6")]
         public void CreateCar(int price, string model)
         {
+            this.mockCarRepo.Setup(y => y.ReadAll()).Returns(this.cars.AsQueryable());
+            this.mockCarRepo.Setup(y => y.Create(It.IsAny<Car>())).Callback<Car>((Car c) => this.cars.Add(c));
             int carcount = this.cars.Count;
             var x = this.cLogic.ReadAll();
             Car newcar = new Car()
@@ -130,14 +125,15 @@ namespace GFFDCC_HFT_2021221.Test
                 Model = model,
                 BasePrice= price       
             };
-            this.mockCarRepo.Setup(y => y.ReadAll()).Returns(this.cars.AsQueryable());
-            this.mockCarRepo.Setup(y => y.Read(It.IsAny<int>())).Returns(this.cars[6]);
+            this.cLogic.Create(newcar);
             Assert.That(x.Count, Is.EqualTo(carcount + 1));
             Assert.That(newcar.Model, Is.EqualTo(model));
         }
         [Test]
         public void CreateBrand()
         {
+            this.mockBrandRepo.Setup(y => y.ReadAll()).Returns(this.brands.AsQueryable());
+            this.mockBrandRepo.Setup(y => y.Create(It.IsAny<Brand>())).Callback<Brand>((Brand b) => this.brands.Add(b));
             int brandcount = this.brands.Count;
             var x = this.bLogic.ReadAll();
             Brand mybrand = new Brand()
@@ -145,8 +141,7 @@ namespace GFFDCC_HFT_2021221.Test
                 Id = brandcount + 1,
                 Name= "MyBrand"
             };
-            this.mockBrandRepo.Setup(y => y.ReadAll()).Returns(this.brands.AsQueryable());
-            this.mockBrandRepo.Setup(y => y.Read(It.IsAny<int>())).Returns(this.brands[6]);
+            this.bLogic.Create(mybrand);
             Assert.That(x.Count, Is.EqualTo(brandcount + 1));
             Assert.That(mybrand.Name, Is.EqualTo("MyBrand"));
 

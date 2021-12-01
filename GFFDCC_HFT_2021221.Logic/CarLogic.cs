@@ -75,6 +75,11 @@ namespace GFFDCC_HFT_2021221.Logic
                      };
             return x1;
         }
+        public IEnumerable<Car> CarsByBrand(int price)
+        {
+            var q = from x in carRepo.ReadAll()
+                    join 
+        }
 
     }
 }
