@@ -24,5 +24,9 @@ namespace GFFDCC_HFT_2021221.Models
         {
             Cars = new HashSet<Car>();
         }
+        public override string ToString()
+        {
+            return $" {this.Id,3} {this.Name,20}";
+        }
     }
 }

@@ -33,5 +33,9 @@ namespace GFFDCC_HFT_2021221.Models
         public int BrandId { get; set; }
         [ForeignKey(nameof(CarDealership))]
         public int CarDealershipID { get; set; }
+        public override string ToString()
+        {
+            return $" {this.Id,3} {this.Model,20} {this.BasePrice + "$",8} {this.BrandId,6} {this.CarDealershipID,11}";
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using GFFDCC_HFT_2021221.Logic;
+using GFFDCC_HFT_2021221.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,9 +14,13 @@ namespace GFFDCC_HFT_2021221.Endpoint.Controllers
     public class StatController : ControllerBase
     {
         ICarLogic cl;
-        public StatController(ICarLogic cl)
+        IBrandLogic bl;
+        ICarDealershipLogic cdl;
+        public StatController(ICarLogic cl, IBrandLogic bl, ICarDealershipLogic cdl)
         {
             this.cl = cl;
+            this.bl = bl;
+            this.cdl = cdl;
         }
 
         [HttpGet]
@@ -28,6 +33,24 @@ namespace GFFDCC_HFT_2021221.Endpoint.Controllers
         public IEnumerable<KeyValuePair<string,double>> AVGPricebyBrands()
         {
             return cl.AVGPriceByBrands();
+        }
+        [HttpGet]
+        public IEnumerable<Car> CarsFromHasznaltauto()
+        {
+            return cl.CarsFromHasznaltauto();
+
+        }
+        [HttpGet]
+        public IEnumerable<Car> CarsByCountry(string country)
+        {
+            return cl.CarsByCountry(country);
+
+        }
+        [HttpGet]
+        public IEnumerable<AveragePriceResult> AverageCarPriceByBrandsHigherThan(int minavg)
+        {
+            return cl.AverageCarPriceByBrandsHigherThan(minavg);
+
         }
 
     }

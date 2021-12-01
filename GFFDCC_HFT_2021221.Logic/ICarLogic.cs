@@ -12,5 +12,11 @@ namespace GFFDCC_HFT_2021221.Logic
         Car Read(int id);
         IEnumerable<Car> ReadAll();
         void Update(Car car);
+        IEnumerable<Car> CarsFromHasznaltauto();
+        IEnumerable<Car> CarsByCountry(string country);
+        IEnumerable<KeyValuePair<string, double>> BrandPopularityByCars();
+        IEnumerable<AveragePriceResult> AverageCarPriceByBrandsHigherThan(int minavg);
+
+
     }
 }

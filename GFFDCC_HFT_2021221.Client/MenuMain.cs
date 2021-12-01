@@ -29,7 +29,7 @@ namespace GFFDCC_HFT_2021221.Client
         {
             this.ConsoleMenu = new ConsoleMenu().
                 Add("Cars", () => this.CreateCarMenu()).
-                Add("Brands", () => this.CreateBrandMenu()).
+                Add("Brands", () => this.CreateBrandAndDealershipMenu()).
                 Add("Statistics", () => this.CreateStatisticsMenu()).
                 Add("Close", ConsoleMenu.Close);
         }
@@ -38,20 +38,38 @@ namespace GFFDCC_HFT_2021221.Client
             this.CarMenu = new ConsoleMenu().
                  Add("Read all Car", () => this.CMenu.ReadAllCar()).
                  Add("Read one Car", () => this.CMenu.ReadOneCar()).
-                 Add("Add Car", () => this.CMenu.AddCar()).
-                 Add("Delete Car", () => this.CMenu.DeleteCar()).
-                 Add("ChangeCarName", () => this.CMenu.ChangeCarModel()).
-                Add("ChangeCarPrice", () => this.CMenu.ChangeCarPrice()).
-                Add("Close", ConsoleMenu.Close);
+                 Add("Update Car Model", () => this.CMenu.UpdateCarModel()).
+                 Add("Update Car Price", () => this.CMenu.UpdateCarPrice()).
+                 Add("Create Car", () => this.CMenu.CreateCar()).
+                 Add("Delete Car", () => this.CMenu.DeleteCar()).                
+                 Add("Close", ConsoleMenu.Close);
             this.CarMenu.Show();
         }
-        private void CreateBrandMenu()
+        private void CreateBrandAndDealershipMenu()
         {
-
+            this.BrandMenu = new ConsoleMenu().
+                Add("Read all Brand", () => this.BMenu.ReadAllBrand()).
+                Add("Read all Cardealership", () => this.BMenu.ReadAllCardealership()).
+                Add("Read one Brand", () => this.BMenu.ReadOneBrand()).
+                Add("Read one Cardealership", () => this.BMenu.ReadOneCardealership()).
+                Add("Create Brand", () => this.BMenu.CreateBrand()).
+                Add("Create Cardealership", () => this.BMenu.CreateCardealership()).
+                Add("Delete Brand", () => this.BMenu.DeleteBrand()).
+                Add("Delete Cardealership", () => this.BMenu.DeleteCardealership()).
+                Add("Update Cardealership Country", () => this.BMenu.UpdateDealershipCountry()).
+                Add("Close", ConsoleMenu.Close);
+            this.BrandMenu.Show();
         }
         private void CreateStatisticsMenu()
         {
-
+            this.StatisticsMenu = new ConsoleMenu().
+                Add("Average price results higher than", () => this.SMenu.AverageCarPriceByBrandsHigherThan()).
+                Add("Cars by country", () => this.SMenu.CarsByCountry()).
+                Add("Brand popularity by cars", () => this.SMenu.BrandPopularityByCars()).
+                Add("Cars from hasznaltauto", () => this.SMenu.CarsFromHasznaltauto()).
+                Add("Average prices by brands", () => this.SMenu.AVGPriceByBrands()).
+                Add("Close", ConsoleMenu.Close);
+            this.StatisticsMenu.Show();
         }
     }
 }
