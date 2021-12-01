@@ -7,12 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ConsoleMenu-simple" Version="2.4.1" />
+    <PackageReference Include="ConsoleTools" Version="0.5.4" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GFFDCC_HFT_2021221.Data\GFFDCC_HFT_2021221.Data.csproj" />
+    <ProjectReference Include="..\GFFDCC_HFT_2021221.Logic\GFFDCC_HFT_2021221.Logic.csproj" />
     <ProjectReference Include="..\GFFDCC_HFT_2021221.Models\GFFDCC_HFT_2021221.Models.csproj" />
+    <ProjectReference Include="..\GFFDCC_HFT_2021221.Repository\GFFDCC_HFT_2021221.Repository.csproj" />
   </ItemGroup>
 
 </Project>

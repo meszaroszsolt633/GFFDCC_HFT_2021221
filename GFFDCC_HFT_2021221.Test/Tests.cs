@@ -144,8 +144,11 @@ namespace GFFDCC_HFT_2021221.Test
             this.bLogic.Create(mybrand);
             Assert.That(x.Count, Is.EqualTo(brandcount + 1));
             Assert.That(mybrand.Name, Is.EqualTo("MyBrand"));
+        }
+        [Test]
+        public void AVGPriceByBrandsTest()
+        {
 
         }
-
     }
 }

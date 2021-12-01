@@ -11,8 +11,6 @@ namespace GFFDCC_HFT_2021221.Client
         {
             System.Threading.Thread.Sleep(8000);
             RestService rest = new RestService("http://localhost:5822");
-            var brands = rest.Get<Brand>("brand");
-            ;
         }
     }
 }
