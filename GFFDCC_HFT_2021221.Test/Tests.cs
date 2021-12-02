@@ -36,9 +36,9 @@ namespace GFFDCC_HFT_2021221.Test
 
             this.cardealerships = new List<CarDealership>()
             {
-                new CarDealership(){Id=1,Name="asdasd"},
-                new CarDealership(){Id=2,Name="CardealershipTest2"},
-                new CarDealership(){Id=3,Name="CardealershipTest3"},
+                new CarDealership(){Id=1,Name="asdasd",Country="Hungary"},
+                new CarDealership(){Id=2,Name="CardealershipTest2",Country="Romania"},
+                new CarDealership(){Id=3,Name="CardealershipTest3",Country="Slovakia"},
             };
             this.brands = new List<Brand>()
             {
@@ -49,11 +49,11 @@ namespace GFFDCC_HFT_2021221.Test
             };
             this.cars = new List<Car>()
             {
-                new Car(){Id=1, Model="Test1"},
-                new Car(){Id=2, Model="Test2"},
-                new Car(){Id=3, Model="Test3"},
-                new Car(){Id=4, Model="Test4"},
-                new Car(){Id=5, Model="Test5"},
+                new Car(){Id=1, Model="Test1",BasePrice=5000,BrandId=1,CarDealershipID=2},
+                new Car(){Id=2, Model="Test2",BasePrice=10000,BrandId=2,CarDealershipID=3},
+                new Car(){Id=3, Model="Test3",BasePrice=15000,BrandId=3,CarDealershipID=3},
+                new Car(){Id=4, Model="Test4",BasePrice=25000,BrandId=4,CarDealershipID=1},
+                new Car(){Id=5, Model="Test5",BasePrice=20000,BrandId=1,CarDealershipID=1},
             };
             
             
@@ -148,6 +148,57 @@ namespace GFFDCC_HFT_2021221.Test
         [Test]
         public void AVGPriceByBrandsTest()
         {
+            this.mockCarRepo.Setup(repo => repo.ReadAll()).Returns(this.cars.AsQueryable);
+            this.mockBrandRepo.Setup(repo => repo.ReadAll()).Returns(this.brands.AsQueryable);
+            var testcars1 = this.cLogic.AVGPriceByBrands().ToArray();
+            List<Car> testcars0 = new List<Car>()
+            {
+                new Car(){Id=1, Model="Test1",BasePrice=5000,BrandId=1,CarDealershipID=2},
+                new Car(){Id=2, Model="Test2",BasePrice=10000,BrandId=2,CarDealershipID=3},
+                new Car(){Id=3, Model="Test3",BasePrice=15000,BrandId=3,CarDealershipID=3},
+                new Car(){Id=4, Model="Test4",BasePrice=25000,BrandId=4,CarDealershipID=1},
+                new Car(){Id=5, Model="Test5",BasePrice=20000,BrandId=1,CarDealershipID=1},
+            };
+            Array testcars2 = testcars0.ToArray();
+            Assert.That(testcars1, Is.EquivalentTo(testcars2));
+        }
+        [Test]
+        public void CarsFromHasznaltautoTest()
+        {
+            this.mockCarRepo.Setup(repo => repo.ReadAll()).Returns(this.cars.AsQueryable);
+            this.mockBrandRepo.Setup(repo => repo.ReadAll()).Returns(this.brands.AsQueryable);
+            var result = this.cLogic.AVGPriceByBrands();
+            List<Car> testcars0 = new List<Car>()
+            {
+                new Car(){Id=2, Model="Test2",BasePrice=10000,BrandId=2,CarDealershipID=3},
+                new Car(){Id=3, Model="Test3",BasePrice=15000,BrandId=3,CarDealershipID=3},
+            };
+            //Array testcars2 = testcars0.ToArray();
+            Assert.That(result, Is.EquivalentTo(testcars0));
+        }
+        [TestCase(6000)]
+        public void AverageCarPriceByBrandsHigherThanTest(int minavg)
+        {
+            List<AveragePriceResult> expected = new List<AveragePriceResult>()
+            {
+
+                new AveragePriceResult() { Brand = "BrandTest1", Avgprice = 12500 },
+                new AveragePriceResult() { Brand = "BrandTest2", Avgprice = 10000 },
+                new AveragePriceResult() { Brand = "BrandTest3", Avgprice = 15000 },
+                new AveragePriceResult() { Brand = "BrandTest4", Avgprice = 25000 },
+            };
+            this.mockCarRepo.Setup(repo => repo.ReadAll()).Returns(this.cars.AsQueryable);
+            this.mockBrandRepo.Setup(repo => repo.ReadAll()).Returns(this.brands.AsQueryable);
+            var result = this.cLogic.AverageCarPriceByBrandsHigherThan(minavg);
+            Assert.That(result, Is.EquivalentTo(expected));
+        }
+        public void BrandPopularityByCarsTest()
+        {
+            this.mockCarRepo.Setup(repo => repo.ReadAll()).Returns(this.cars.AsQueryable);
+            this.mockBrandRepo.Setup(repo => repo.ReadAll()).Returns(this.brands.AsQueryable);
+            var result = this.cLogic.BrandPopularityByCars();
+
+           // Assert.That(result, Is.EquivalentTo(expected));
 
         }
     }
