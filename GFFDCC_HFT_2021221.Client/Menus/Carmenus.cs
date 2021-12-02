@@ -18,6 +18,8 @@ namespace GFFDCC_HFT_2021221.Client.Menus
         public CarLogic CLogic { get; set; }
         public void ReadAllCar()
         {
+            ;
+            var x = this.CLogic.ReadAll();
             foreach (var item in this.CLogic.ReadAll())
             {
                 Console.WriteLine(item.ToString());

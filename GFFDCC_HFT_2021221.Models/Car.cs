@@ -29,13 +29,14 @@ namespace GFFDCC_HFT_2021221.Models
         [NotMapped]
         [JsonIgnore]
         public virtual CarDealership CarDealership { get; set; }
-        [ForeignKey(nameof(Brand))]
+        [ForeignKey("brands")]
         public int BrandId { get; set; }
-        [ForeignKey(nameof(CarDealership))]
+        [ForeignKey("cardealerships")]
         public int CarDealershipID { get; set; }
         public override string ToString()
         {
-            return $" {this.Id,3} {this.Model,20} {this.BasePrice + "$",8} {this.BrandId,6} {this.CarDealershipID,11}";
+            return $" {this.Id,3}{this.Model,20} {this.BasePrice + "$",8} {this.BrandId,6} {this.CarDealership.Id,11}";
+             //
         }
     }
 }

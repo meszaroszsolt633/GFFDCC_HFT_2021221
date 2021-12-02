@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace GFFDCC_HFT_2021221.Models
@@ -21,10 +22,11 @@ namespace GFFDCC_HFT_2021221.Models
         public string Country { get; set; }
         public string Taxnumber { get; set; }
         [NotMapped]
-        public virtual ICollection<Car> Cars { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Car> Carsatstock { get; set; }
         public CarDealership()
         {
-            Cars = new HashSet<Car>();
+            Carsatstock = new HashSet<Car>();
         }
         public override string ToString()
         {
