@@ -53,7 +53,9 @@ namespace GFFDCC_HFT_2021221.Logic
         public IEnumerable<KeyValuePair<string, double>> AVGPriceByBrands()
         {
             return from x in carRepo.ReadAll()
-                   group x by x.Brand.Name into g
+                   join y in brandRepo.ReadAll()
+                   on x.BrandId equals y.Id
+                   group x by y.Name into g
                    select new KeyValuePair<string, double>
                    (g.Key, g.Average(t => t.BasePrice));
         }
@@ -89,7 +91,7 @@ namespace GFFDCC_HFT_2021221.Logic
                      };
             return x1;
         }
-        public IEnumerable<KeyValuePair<string,double>> BrandPopularityByCars()
+        public IEnumerable<KeyValuePair<string, double>> BrandPopularityByCars()
         {
             return from x in carRepo.ReadAll()
                    join y in brandRepo.ReadAll()
@@ -97,7 +99,7 @@ namespace GFFDCC_HFT_2021221.Logic
                    group x by y.Name into z
                    select new KeyValuePair<string, double>
                    (z.Key, z.Count());
-                   
+
 
         }
         public IEnumerable<AveragePriceResult> AverageCarPriceByBrandsHigherThan(int minavg)

@@ -10,5 +10,16 @@ namespace GFFDCC_HFT_2021221.Logic
     {
         public string Brand { get; set; }
         public double Avgprice { get; set; }
+        public override bool Equals(object obj)
+        {
+            if (obj is AveragePriceResult)
+            {
+                AveragePriceResult other = obj as AveragePriceResult;
+
+                return this.Brand == other.Brand &&
+                    this.Avgprice == other.Avgprice;
+            }
+            return false;
+        }
     }
 }
