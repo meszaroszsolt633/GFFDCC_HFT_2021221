@@ -1,6 +1,8 @@
-﻿using GFFDCC_HFT_2021221.Logic;
+﻿using GFFDCC_HFT_2021221.Endpoint.Services;
+using GFFDCC_HFT_2021221.Logic;
 using GFFDCC_HFT_2021221.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +17,12 @@ namespace GFFDCC_HFT_2021221.Endpoint.Controllers
     public class CarController : ControllerBase
     {
         ICarLogic cl;
-        public CarController(ICarLogic cl)
+        IHubContext<SignalRHub> hub;
+
+        public CarController(ICarLogic cl, IHubContext<SignalRHub> hub)
         {
             this.cl = cl;
+            this.hub = hub;
         }
         // GET: /car
         [HttpGet]
@@ -38,20 +43,24 @@ namespace GFFDCC_HFT_2021221.Endpoint.Controllers
         public void Post([FromBody] Car value)
         {
             cl.Create(value);
+            this.hub.Clients.All.SendAsync("CarCreated", value);
         }
 
         // PUT api/<CarController>/5
-        [HttpPut("{id}")]
+        [HttpPut]
         public void Put([FromBody] Car value)
         {
             cl.Update(value);
+            this.hub.Clients.All.SendAsync("CarUpdated", value);
         }
 
         // DELETE api/<CarController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var carToDelete = this.cl.Read(id);
             cl.Delete(id);
+            this.hub.Clients.All.SendAsync("CarDeleted", carToDelete);
         }
     }
 }

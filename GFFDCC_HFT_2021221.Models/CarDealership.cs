@@ -32,5 +32,9 @@ namespace GFFDCC_HFT_2021221.Models
         {
             return $" {this.Id,3} {this.Name,20} {this.Country,12} {this.Taxnumber,12}";
         }
+        public override int GetHashCode()
+        {
+            return this.Id;
+        }
     }
 }

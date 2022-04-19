@@ -34,12 +34,12 @@ namespace GFFDCC_HFT_2021221.Data
                 .HasOne(cars => cars.CarDealership)            
                 .WithMany(cardealerships => cardealerships.Carsatstock)
                 .HasForeignKey(cars => cars.CarDealershipID)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
                 entity
                 .HasOne(cars => cars.Brand)
                 .WithMany(brands => brands.Cars)
                 .HasForeignKey(cars => cars.BrandId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
             });
             //modelbuilder.entity<car>(entity =>
             //{
