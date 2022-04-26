@@ -21,11 +21,33 @@ namespace GFFDCC_HFT_2021221.WpfClient
         private Brand selectedBrand;
         private CarDealership selectedCarDealership;
         private string carnameFieldContent;
+        private int carbasepriceFieldContent;
+        private string brandnameFieldContent;
+        public string BrandnameFieldContent
+        {
+            get { return brandnameFieldContent; }
+            set
+            {
+                SetProperty(ref brandnameFieldContent, value);
+                (CreateBrandCommand as RelayCommand)?.NotifyCanExecuteChanged();
+                (UpdateBrandCommand as RelayCommand)?.NotifyCanExecuteChanged();
+            }
+        }
         public string CarnameFieldContent
         {
             get { return carnameFieldContent; }
             set{
                 SetProperty(ref carnameFieldContent, value);
+                (CreateCarCommand as RelayCommand)?.NotifyCanExecuteChanged();
+                (UpdateCarCommand as RelayCommand)?.NotifyCanExecuteChanged();
+            }
+        }
+        public int CarbasepriceFieldContent
+        {
+            get { return carbasepriceFieldContent; }
+            set
+            {
+                SetProperty(ref carbasepriceFieldContent, value);
                 (CreateCarCommand as RelayCommand)?.NotifyCanExecuteChanged();
                 (UpdateCarCommand as RelayCommand)?.NotifyCanExecuteChanged();
             }
@@ -52,6 +74,7 @@ namespace GFFDCC_HFT_2021221.WpfClient
                     (UpdateCarCommand as RelayCommand).NotifyCanExecuteChanged();
                     (DeleteCarCommand as RelayCommand).NotifyCanExecuteChanged();
                     CarnameFieldContent = selectedCar.Model;
+                    CarbasepriceFieldContent = selectedCar.BasePrice;
                 }
                 
             }
@@ -72,6 +95,7 @@ namespace GFFDCC_HFT_2021221.WpfClient
                     };
                     SetProperty(ref selectedBrand, value);
                     (DeleteBrandCommand as RelayCommand).NotifyCanExecuteChanged();
+                    BrandnameFieldContent = selectedBrand.Name;
                 }
                 
             }
@@ -128,7 +152,7 @@ namespace GFFDCC_HFT_2021221.WpfClient
                     Cars.Add(new Car()
                     {
                         Model = CarnameFieldContent,
-                        BasePrice=SelectedCar.BasePrice,
+                        BasePrice=CarbasepriceFieldContent,
                         Brand=SelectedCar.Brand,
                         CarDealership = SelectedCar.CarDealership,
                         BrandId =SelectedCar.BrandId,
@@ -151,6 +175,7 @@ namespace GFFDCC_HFT_2021221.WpfClient
                 UpdateCarCommand = new RelayCommand(() =>
                 {
                     SelectedCar.Model = CarnameFieldContent;
+                    SelectedCar.BasePrice = CarbasepriceFieldContent;
                     Cars.Update(SelectedCar);
                 });
 
@@ -160,7 +185,7 @@ namespace GFFDCC_HFT_2021221.WpfClient
                 {
                     Brands.Add(new Brand()
                     {
-                        Name=SelectedBrand.Name,
+                        Name= BrandnameFieldContent,
                         Cars=SelectedBrand.Cars
                     });
                 }
@@ -179,6 +204,7 @@ namespace GFFDCC_HFT_2021221.WpfClient
 
                 UpdateBrandCommand = new RelayCommand(() =>
                 {
+                    SelectedBrand.Name = BrandnameFieldContent;
                     Brands.Update(SelectedBrand);
                 });
                 

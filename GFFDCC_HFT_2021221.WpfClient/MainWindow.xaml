@@ -27,6 +27,8 @@
                     <StackPanel Grid.Column="1">
                         <Label Content="Car Model" Background="LightBlue" Padding="10" />
                         <TextBox Text="{Binding CarnameFieldContent,UpdateSourceTrigger=PropertyChanged}" Padding="10" Margin="0,0,0,30" />
+                        <Label Content="Car Base Price" Background="LightBlue" Padding="10" />
+                        <TextBox Text="{Binding CarbasepriceFieldContent,UpdateSourceTrigger=PropertyChanged}" Padding="10" Margin="0,0,0,30" />
                         <Button Content="Create Car" Command="{Binding CreateCarCommand}" Margin="10" Padding="10"/>
                         <Button Content="Delete Car" Command="{Binding DeleteCarCommand}" Margin="10" Padding="10"/>
                         <Button Content="Update Car" Command="{Binding UpdateCarCommand}" Margin="10" Padding="10"/>
@@ -48,7 +50,7 @@
                     </ListBox>
                     <StackPanel Grid.Column="1">
                         <Label Content="Brand Name" Background="LightBlue" Padding="10" />
-                        <TextBox Text="{Binding SelectedBrand.Name}" Padding="10" Margin="0,0,0,30" />
+                        <TextBox Text="{Binding BrandnameFieldContent,UpdateSourceTrigger=PropertyChanged}" Padding="10" Margin="0,0,0,30" />
                         <Button Content="Create Brand" Command="{Binding CreateBrandCommand}" Margin="10" Padding="10"/>
                         <Button Content="Delete Brand" Command="{Binding DeleteBrandCommand}" Margin="10" Padding="10"/>
                         <Button Content="Update Brand" Command="{Binding UpdateBrandCommand}" Margin="10" Padding="10"/>
@@ -70,7 +72,11 @@
                     </ListBox>
                     <StackPanel Grid.Column="1">
                         <Label Content="Cardealership Name" Background="LightBlue" Padding="10" />
-                        <TextBox Text="{Binding SelectedCarDealership.Name}" Padding="10" Margin="0,0,0,30" />
+                        <TextBox Text="{Binding SelectedCarDealership.Name}" Padding="10" Margin="0,0,0,0" />
+                        <Label Content="Cardealership's Tax Number" Background="LightBlue" Padding="10" />
+                        <TextBox Text="{Binding SelectedCarDealership.Taxnumber}" Padding="10" Margin="0,0,0,0" />
+                        <Label Content="Cardealership's Country" Background="LightBlue" Padding="10" />
+                        <TextBox Text="{Binding SelectedCarDealership.Country}" Padding="10" Margin="0,0,0,0" />
                         <Button Content="Create Cardealership" Command="{Binding CreateCarDealershipCommand}" Margin="10" Padding="10"/>
                         <Button Content="Delete Cardealership" Command="{Binding DeleteCarDealershipCommand}" Margin="10" Padding="10"/>
                         <Button Content="Update Cardealership" Command="{Binding UpdateCarDealershipCommand}" Margin="10" Padding="10"/>

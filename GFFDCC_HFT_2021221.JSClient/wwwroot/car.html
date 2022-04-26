@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Car UI</title>   
+    <title>Car UI</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
 <body>
@@ -15,17 +15,26 @@
             </ul>
         </div>
     </nav>
-    <h1>Brand Catalog</h1>
+    <h1>Car Catalog</h1>
     <div id="formdiv">
-        <label>Brand Name</label>
+        <label>Car Model</label>
         <input type="text" id="nameinput" />
-        <button type="button" onclick="create()">Add Brand</button>
+        <label>Car Baseprice</label>
+        <input type="text" id="priceinput" />
+        <label>Car BrandID</label>
+        <input type="text" id="brandidinput" />
+        <label>Car CardealershipID</label>
+        <input type="text" id="cardealershipidinput" />
+        <button type="button" onclick="create()">Add Car</button>
     </div>
     <table>
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
+                <th>Model</th>
+                <th>Baseprice</th>
+                <th>BrandId</th>
+                <th>CarDealershipID</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -34,7 +43,7 @@
     </table>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="script.js"></script>
+    <script src="carscript.js"></script>
 
 </body>
 </html>
