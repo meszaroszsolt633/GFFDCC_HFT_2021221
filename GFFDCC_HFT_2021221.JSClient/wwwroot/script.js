@@ -1,5 +1,6 @@
 ﻿let brands = [];
 let connection = null;
+let brandidupdate = -1;
 getdata();
 setupSignalR();
 
@@ -15,6 +16,9 @@ function setupSignalR() {
     });
 
     connection.on("BrandDeleted", (user, message) => {
+        getdata();
+    });
+    connection.on("BrandUpdated", (user, message) => {
         getdata();
     });
 
@@ -55,7 +59,8 @@ function display() {
         document.getElementById('resultarea').innerHTML +=
             "<tr><td>" + t.id + "</td><td>"
         + t.name + "</td><td>" +
-            `<button type="button" onclick="Remove(${t.id})">Delete</button>`
+        `<button type="button" onclick="Remove(${t.id})">Delete</button>` +
+        `<button type="button" onclick="showupdate(${t.id})">Update</button>`
             + "</td></tr>";
     });
 }
@@ -73,14 +78,38 @@ function Remove(id) {
         })
         .catch((error) => { console.error('Error:', error); });
 }
-
+function showupdate(id) {
+    document.getElementById('nameinputupdate').value = brands.find(t => t[`id`] == id)['name'];
+    document.getElementById('updateformdiv').style.display = 'flex';
+    brandidupdate = id;
+}
 function create() {
     let name = document.getElementById('nameinput').value;
     fetch('http://localhost:5822/brand', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', },
         body: JSON.stringify(
-            { name: name })
+            {
+                name: name
+            })
+    })
+        .then(response => response)
+        .then(data => {
+            console.log('Success:', data);
+            getdata();
+        })
+        .catch((error) => { console.error('Error', error); });
+
+}
+
+function update() {
+    document.getElementById('updateformdiv').style.display = 'none';
+    let name = document.getElementById('nameinputupdate').value;
+    fetch('http://localhost:5822/brand', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', },
+        body: JSON.stringify(
+            { name: name, id: brandidupdate })
     })
         .then(response => response)
         .then(data => {

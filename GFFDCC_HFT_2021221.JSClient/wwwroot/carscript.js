@@ -1,5 +1,6 @@
 ﻿let cars = [];
 let connection = null;
+let caridupdate = -1;
 getdata();
 setupSignalR();
 
@@ -15,6 +16,9 @@ function setupSignalR() {
     });
 
     connection.on("CarDeleted", (user, message) => {
+        getdata();
+    });
+    connection.on("CarUpdated", (user, message) => {
         getdata();
     });
 
@@ -57,7 +61,8 @@ function display() {
             "<tr><td>" + t.id + "</td><td>"
         + t.model + "</td><td>" + t.basePrice + "</td><td>" + t.brandId + "</td><td>"
         + t.carDealershipID + "</td><td>" +
-            `<button type="button" onclick="Remove(${t.id})">Delete</button>`
+        `<button type="button" onclick="Remove(${t.id})">Delete</button>` +
+            `<button type="button" onclick="showupdate(${t.id})">Update</button>`
             + "</td></tr>";
     });
 }
@@ -75,7 +80,40 @@ function Remove(id) {
         })
         .catch((error) => { console.error('Error:', error); });
 }
+function showupdate(id) {
+    document.getElementById('nameinputupdate').value = cars.find(t => t[`id`] == id)['model'];
+    document.getElementById('priceinputupdate').value = cars.find(t => t[`id`] == id)['basePrice'];
+    document.getElementById('brandidinputupdate').value = cars.find(t => t[`id`] == id)['brandId'];
+    document.getElementById('cardealershipidinputupdate').value = cars.find(t => t[`id`] == id)['carDealershipID'];
+    document.getElementById('updateformdiv').style.display = 'flex';
+    caridupdate = id;
+}
+function update() {
+    document.getElementById('updateformdiv').style.display = 'none';
+    let model = document.getElementById('nameinputupdate').value;
+    let baseprice = parseInt(document.getElementById('priceinputupdate').value);
+    let brandid = parseInt(document.getElementById('brandidinputupdate').value);
+    let cardealershipid = parseInt(document.getElementById('cardealershipidinputupdate').value);
+    fetch('http://localhost:5822/car', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', },
+        body: JSON.stringify(
+            {
+                model: model,
+                basePrice: baseprice,
+                brandId: brandid,
+                carDealershipID: cardealershipid,
+                id: caridupdate
+            })
+    })
+        .then(response => response)
+        .then(data => {
+            console.log('Success:', data);
+            getdata();
+        })
+        .catch((error) => { console.error('Error', error); });
 
+}
 function create() {
     let model = document.getElementById('nameinput').value;
     let baseprice = parseInt(document.getElementById('priceinput').value);

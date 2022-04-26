@@ -1,5 +1,6 @@
 ﻿let cardealerships = [];
 let connection = null;
+cardealershipidupdate = -1;
 getdata();
 setupSignalR();
 
@@ -15,6 +16,9 @@ function setupSignalR() {
     });
 
     connection.on("CardealershipDeleted", (user, message) => {
+        getdata();
+    });
+    connection.on("CardealershipUpdated", (user, message) => {
         getdata();
     });
 
@@ -55,7 +59,8 @@ function display() {
         document.getElementById('resultarea').innerHTML +=
             "<tr><td>" + t.id + "</td><td>"
         + t.name + "</td><td>" + t.taxnumber + "</td><td>" + t.country + "</td><td>" +
-            `<button type="button" onclick="Remove(${t.id})">Delete</button>`
+        `<button type="button" onclick="Remove(${t.id})">Delete</button>` +
+        `<button type="button" onclick="showupdate(${t.id})">Update</button>`
             + "</td></tr>";
     });
 }
@@ -73,7 +78,34 @@ function Remove(id) {
         })
         .catch((error) => { console.error('Error:', error); });
 }
+function showupdate(id) {
+    document.getElementById('nameinputupdate').value = cardealerships.find(t => t[`id`] == id)['model'];
+    document.getElementById('taxnumberinputupdate').value = cardealerships.find(t => t[`id`] == id)['basePrice'];
+    document.getElementById('countryinputupdate').value = cardealerships.find(t => t[`id`] == id)['brandId'];
+    document.getElementById('updateformdiv').style.display = 'flex';
+    cardealershipidupdate = id;
+    function create() {
+        let name = document.getElementById('nameinput').value;
+        let taxnumber = document.getElementById('taxnumberinput').value;
+        let country = document.getElementById('countryinput').value;
+        fetch('http://localhost:5822/cardealership', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', },
+            body: JSON.stringify(
+                {
+                    name: name,
+                    taxnumber: taxnumber,
+                    country: country
+                })
+        })
+            .then(response => response)
+            .then(data => {
+                console.log('Success:', data);
+                getdata();
+            })
+            .catch((error) => { console.error('Error', error); });
 
+    }
 function create() {
     let name = document.getElementById('nameinput').value;
     let taxnumber = document.getElementById('taxnumberinput').value;
