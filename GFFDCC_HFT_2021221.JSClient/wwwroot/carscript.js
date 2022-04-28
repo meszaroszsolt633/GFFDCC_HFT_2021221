@@ -3,6 +3,7 @@ let connection = null;
 let caridupdate = -1;
 getdata();
 setupSignalR();
+document.getElementById('updateformdiv').style.display = 'none';
 
 
 function setupSignalR() {
@@ -44,7 +45,7 @@ async function getdata() {
         .then(x => x.json())
         .then(y => {
             cars = y;
-            //console.log(cars);
+            console.log(cars);
             display();
         });
 }

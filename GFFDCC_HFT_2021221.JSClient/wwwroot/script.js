@@ -3,6 +3,7 @@ let connection = null;
 let brandidupdate = -1;
 getdata();
 setupSignalR();
+document.getElementById('updateformdiv').style.display = 'none';
 
 
 function setupSignalR() {

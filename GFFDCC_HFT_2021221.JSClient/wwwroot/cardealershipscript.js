@@ -1,8 +1,9 @@
 ﻿let cardealerships = [];
 let connection = null;
-cardealershipidupdate = -1;
+let cardealershipidupdate = -1;
 getdata();
 setupSignalR();
+document.getElementById('updateformdiv').style.display = 'none';
 
 
 function setupSignalR() {
@@ -44,7 +45,7 @@ async function getdata() {
         .then(x => x.json())
         .then(y => {
             cardealerships = y;
-            //console.log(cars);
+            console.log(cardealerships);
             display();
         });
 }
@@ -79,23 +80,27 @@ function Remove(id) {
         .catch((error) => { console.error('Error:', error); });
 }
 function showupdate(id) {
-    document.getElementById('nameinputupdate').value = cardealerships.find(t => t[`id`] == id)['model'];
-    document.getElementById('taxnumberinputupdate').value = cardealerships.find(t => t[`id`] == id)['basePrice'];
-    document.getElementById('countryinputupdate').value = cardealerships.find(t => t[`id`] == id)['brandId'];
+    document.getElementById('nameinputupdate').value = cardealerships.find(t => t[`id`] == id)['name'];
+    document.getElementById('taxnumberinputupdate').value = cardealerships.find(t => t[`id`] == id)['taxnumber'];
+    document.getElementById('countryinputupdate').value = cardealerships.find(t => t[`id`] == id)['country'];
     document.getElementById('updateformdiv').style.display = 'flex';
     cardealershipidupdate = id;
-    function create() {
-        let name = document.getElementById('nameinput').value;
-        let taxnumber = document.getElementById('taxnumberinput').value;
-        let country = document.getElementById('countryinput').value;
+}
+    function update() {
+        document.getElementById('updateformdiv').style.display = 'none';
+        let name = document.getElementById('nameinputupdate').value;
+        let taxnumber = document.getElementById('taxnumberinputupdate').value;
+        let country = document.getElementById('countryinputupdate').value;
         fetch('http://localhost:5822/cardealership', {
-            method: 'POST',
+            method: 'PUT',
             headers: { 'Content-Type': 'application/json', },
             body: JSON.stringify(
                 {
                     name: name,
+                    country: country,
                     taxnumber: taxnumber,
-                    country: country
+                    id: cardealershipidupdate
+                    
                 })
         })
             .then(response => response)
